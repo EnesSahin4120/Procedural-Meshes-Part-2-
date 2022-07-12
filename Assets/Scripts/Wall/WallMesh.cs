@@ -83,9 +83,10 @@ public class WallMesh : MonoBehaviour
         {
             Vector3 currentVertex = vertices[i];
             float distance = (currentVertex - targetContactPoint).magnitude;
+            Vector3 collisionNormal = (targetContactPoint - targetBall.transform.position).normalized;
             if (distance < ballRadius + 0.1f)
             {
-                currentVertex += Vector3.forward * targetBall.throwingFactor * (deformFactor / distance);
+                currentVertex += collisionNormal * targetBall.throwingFactor * (deformFactor / distance);
                 vertices[i] = currentVertex;
             }
         }
